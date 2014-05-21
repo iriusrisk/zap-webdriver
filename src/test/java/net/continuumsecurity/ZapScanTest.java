@@ -45,6 +45,8 @@ public class ZapScanTest {
     private final static String ZAP_PROXYHOST = "localhost";
     private final static int ZAP_PROXYPORT = 8888;
     private final static String ZAP_APIKEY = null;
+
+    // Change this to the appropriate driver for the OS, alternatives in the drivers directory
     private final static String CHROME_DRIVER_PATH = "drivers/chromedriver-mac";
     private final static String MEDIUM = "MEDIUM";
     private final static String HIGH = "HIGH";
