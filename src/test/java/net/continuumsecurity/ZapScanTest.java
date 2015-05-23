@@ -56,6 +56,7 @@ public class ZapScanTest {
     private MyAppNavigation myApp;
     private final static String[] policyNames = {"directory-browsing","cross-site-scripting","sql-injection","path-traversal","remote-file-inclusion","server-side-include",
             "script-active-scan-rules","server-side-code-injection","external-redirect","crlf-injection"};
+    int currentScanID;
 
 
     @Before
@@ -137,9 +138,10 @@ public class ZapScanTest {
     private void scanWithZap() {
         log.info("Scanning...");
         zapScanner.scan(myApp.BASE_URL);
+        currentScanID = zapScanner.getLastScannerScanId();
         int complete = 0;
         while (complete < 100) {
-            complete = zapScanner.getScanStatus();
+            complete = zapScanner.getScanProgress(currentScanID);
             log.info("Scan is " + complete + "% complete.");
             try {
                 Thread.sleep(1000);
@@ -152,41 +154,75 @@ public class ZapScanTest {
 
     private String enableZapPolicy(String policyName) {
         String scannerIds = null;
-            switch (policyName.toLowerCase()) {
-                case "directory-browsing":
-                    scannerIds = "0";
-                    break;
-                case "cross-site-scripting":
-                    scannerIds = "40012,40014,40016,40017";
-                    break;
-                case "sql-injection":
-                    scannerIds = "40018";
-                    break;
-                case "path-traversal":
-                    scannerIds = "6";
-                    break;
-                case "remote-file-inclusion":
-                    scannerIds = "7";
-                    break;
-                case "server-side-include":
-                    scannerIds = "40009";
-                    break;
-                case "script-active-scan-rules":
-                    scannerIds = "50000";
-                    break;
-                case "server-side-code-injection":
-                    scannerIds = "90019";
-                    break;
-                case "external-redirect":
-                    scannerIds = "30000";
-                    break;
-                case "crlf-injection":
-                    scannerIds = "40003";
-                    break;
-            }
-            if (scannerIds == null) throw new RuntimeException("No matching policy found for: " + policyName);
-            zapScanner.setEnableScanners(scannerIds, true);
-            return scannerIds;
+        switch (policyName.toLowerCase()) {
+            case "directory-browsing":
+                scannerIds = "0";
+                break;
+            case "cross-site-scripting":
+                scannerIds = "40012,40014,40016,40017";
+                break;
+            case "sql-injection":
+                scannerIds = "40018";
+                break;
+            case "path-traversal":
+                scannerIds = "6";
+                break;
+            case "remote-file-inclusion":
+                scannerIds = "7";
+                break;
+            case "server-side-include":
+                scannerIds = "40009";
+                break;
+            case "script-active-scan-rules":
+                scannerIds = "50000";
+                break;
+            case "server-side-code-injection":
+                scannerIds = "90019";
+                break;
+            case "remote-os-command-injection":
+                scannerIds = "90020";
+                break;
+            case "external-redirect":
+                scannerIds = "20019";
+                break;
+            case "crlf-injection":
+                scannerIds = "40003";
+                break;
+            case "source-code-disclosure":
+                scannerIds = "42,10045,20017";
+                break;
+            case "shell-shock":
+                scannerIds = "10048";
+                break;
+            case "remote-code-execution":
+                scannerIds = "20018";
+                break;
+            case "ldap-injection":
+                scannerIds = "40015";
+                break;
+            case "xpath-injection":
+                scannerIds = "90021";
+                break;
+            case "xml-external-entity":
+                scannerIds = "90023";
+                break;
+            case "padding-oracle":
+                scannerIds = "90024";
+                break;
+            case "el-injection":
+                scannerIds = "90025";
+                break;
+            case "insecure-http-methods":
+                scannerIds = "90028";
+                break;
+            case "parameter-pollution":
+                scannerIds = "20014";
+                break;
+            default : throw new RuntimeException("No policy found for: "+policyName);
+        }
+        if (scannerIds == null) throw new RuntimeException("No matching policy found for: " + policyName);
+        zapScanner.setEnableScanners(scannerIds, true);
+        return scannerIds;
     }
 
     private static Proxy createZapProxyConfigurationForWebDriver() {
@@ -197,19 +233,22 @@ public class ZapScanTest {
     }
 
     private void spiderWithZap() {
-        zapSpider.excludeFromScan(myApp.LOGOUT_URL);
+        zapSpider.excludeFromSpider(myApp.LOGOUT_URL);
         zapSpider.setThreadCount(5);
         zapSpider.setMaxDepth(5);
         zapSpider.setPostForms(false);
         zapSpider.spider(myApp.BASE_URL);
-        while (zapSpider.getSpiderStatus() < 100) {
+        int spiderID = zapSpider.getLastSpiderScanId();
+        int complete  = 0;
+        while (complete < 100) {
+            complete = zapSpider.getSpiderProgress(spiderID);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        for (String url : zapSpider.getSpiderResults()) {
+        for (String url : zapSpider.getSpiderResults(spiderID)) {
             log.info("Found URL: "+url);
         }
     }

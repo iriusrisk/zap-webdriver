@@ -45,16 +45,16 @@
         <dependency>
             <groupId>net.continuumsecurity</groupId>
             <artifactId>zap-java-api</artifactId>
-            <version>2.3</version>
+            <version>2.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/proxy-2.3.0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>${project.basedir}/libs/proxy-2.4-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.owasp</groupId>
             <artifactId>zaproxy-client-api</artifactId>
-            <version>2.7</version>
+            <version>2.4-1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/zap-api-v2-7.jar</systemPath>
+            <systemPath>${project.basedir}/libs/zap-api-2.4-v1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>edu.umass.cs.benchlab</groupId>
