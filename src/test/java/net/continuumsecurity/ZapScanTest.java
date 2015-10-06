@@ -27,7 +27,6 @@ import net.continuumsecurity.web.drivers.DriverFactory;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
@@ -120,7 +119,7 @@ public class ZapScanTest {
     private List<Alert> filterAlerts(List<Alert> alerts) {
        List<Alert> filtered = new ArrayList<Alert>();
        for (Alert alert : alerts) {
-           if (alert.getRisk().equals(Alert.Risk.High) && alert.getReliability() != Alert.Reliability.Suspicious) filtered.add(alert);
+           if (alert.getRisk().equals(Alert.Risk.High) && alert.getConfidence() != Alert.Confidence.Low) filtered.add(alert);
        }
        return filtered;
     }
