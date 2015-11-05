@@ -23,6 +23,8 @@ package net.continuumsecurity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class MyAppNavigation {
     WebDriver driver;
@@ -33,6 +35,8 @@ public class MyAppNavigation {
 
     public MyAppNavigation(WebDriver driver) {
         this.driver = driver;
+        this.driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        this.driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
     }
 
     public void login() {

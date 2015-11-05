@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.41.0</version>
+            <version>2.48.2</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -45,16 +45,16 @@
         <dependency>
             <groupId>net.continuumsecurity</groupId>
             <artifactId>zap-java-api</artifactId>
-            <version>2.4</version>
+            <version>2.4.2</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/proxy-2.4-SNAPSHOT.jar</systemPath>
+            <systemPath>${project.basedir}/libs/proxy-2.4.2-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.owasp</groupId>
             <artifactId>zaproxy-client-api</artifactId>
-            <version>2.4-1</version>
+            <version>2.4-6</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/zap-api-2.4-v1.jar</systemPath>
+            <systemPath>${project.basedir}/libs/zap-api-2.4-v6.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>edu.umass.cs.benchlab</groupId>
