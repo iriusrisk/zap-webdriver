@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+    <BASE_URL>http://localhost:8080/bodgeit/</BASE_URL>
+    <LOGOUT_URL>http://localhost:8080/bodgeit/logout.jsp</LOGOUT_URL>
+</Config>
