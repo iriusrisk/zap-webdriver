@@ -25,11 +25,12 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-
 public class MyAppNavigation {
+    private Config config;
+
     WebDriver driver;
-    final static String BASE_URL = "http://localhost:8080/bodgeit/";
-    final static String LOGOUT_URL = "http://localhost:8080/bodgeit/logout.jsp";
+    String BASE_URL;
+    String LOGOUT_URL;
     final static String USERNAME = "bobby@continuumsecurity.net";
     final static String PASSWORD = "tables";
 
@@ -37,6 +38,10 @@ public class MyAppNavigation {
         this.driver = driver;
         this.driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         this.driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+
+        config = new Config();
+        BASE_URL = config.GetNodeByName("BASE_URL");
+        LOGOUT_URL = config.GetNodeByName("LOGOUT_URL");
     }
 
     public void login() {
