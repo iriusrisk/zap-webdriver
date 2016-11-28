@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import org.apache.log4j.Logger;
 
+
 public class Config {
     static Logger log = Logger.getLogger(Config.class.getName());
 
