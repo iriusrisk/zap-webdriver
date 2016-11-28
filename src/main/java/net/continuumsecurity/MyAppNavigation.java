@@ -30,8 +30,8 @@ public class MyAppNavigation {
     private Config config;
 
     WebDriver driver;
-    static String BASE_URL;
-    static String LOGOUT_URL;
+    String BASE_URL;
+    String LOGOUT_URL;
     final static String USERNAME = "bobby@continuumsecurity.net";
     final static String PASSWORD = "tables";
 

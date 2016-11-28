@@ -5,13 +5,13 @@ import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-
+import org.apache.log4j.Logger;
 
 public class Config {
-    static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Config.class.getName());
+    static Logger log = Logger.getLogger(Config.class.getName());
 
     private File XmlFile = new File("Config.xml");
-    private static Document doc;
+    private Document doc;
 
     public Config() {
         try {
